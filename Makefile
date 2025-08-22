@@ -4,8 +4,8 @@
 
 
 IMAGE := kernel.elf
-
-CROSS = aarch64-linux-gnu
+TOOLCHAIN_PATH=/home/thomas/workspace/xpack-aarch64-none-elf-gcc-12.2.1-1.2/bin/
+CROSS = ${TOOLCHAIN_PATH}aarch64-none-elf
 CC = ${CROSS}-gcc
 AS = ${CROSS}-as
 LD = ${CROSS}-ld
@@ -28,7 +28,7 @@ OBJS = boot.o vector.o exception.o kernel.o gic_v3.o uart.o psw.o aarch64.o time
 
 all: $(IMAGE)
 
-${IMAGE}: linker.ld ${OBJS}
+${IMAGE}: ${OBJS}
 	${LD} -T linker.ld $^ -o $@
 	${OBJDUMP} -D kernel.elf > kernel.list
 
