@@ -17,14 +17,15 @@ void uart_puthex(uint64_t n)
 
 	uart_putc('0');
 	uart_putc('x');
-	for (int i = 60; i >= 0; i -= 4){
+	for (int i = 60; i >= 0; i -= 4) {
 		uart_putc(hexdigits[(n >> i) & 0xf]);
 		if (i == 32)
 			uart_putc(' ');
 	}
 }
 
-void uart_puts(const char *s) {
+void uart_puts(const char *s)
+{
 	for (int i = 0; s[i] != '\0'; i ++)
 		uart_putc((unsigned char)s[i]);
 }

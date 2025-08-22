@@ -15,7 +15,8 @@
 
 extern void timer_handler(void);
 
-void handle_exception(exception_frame *exc) {
+void handle_exception(exception_frame *exc)
+{
 	uart_puts("An exception occur:\n");
 	uart_puts("exc_type: ");
 	uart_puthex(exc->exc_type);
@@ -67,7 +68,7 @@ void irq_handle(exception_frame *exc)
 	if ( rc != IRQ_FOUND )  {
 		uart_puts("IRQ not found!\n");
 		goto restore_irq_out;
-	}else{
+	} else {
 		uart_puts("IRQ found: ");
 		uart_puthex(irq);
 		uart_puts("\n");

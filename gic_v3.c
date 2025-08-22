@@ -94,7 +94,8 @@ static void init_gicd(void)
 /** Disable IRQ
     @param[in] irq IRQ number
  */
-void gicd_disable_int(irq_no irq) {
+void gicd_disable_int(irq_no irq)
+{
 	*REG_GIC_GICD_ICENABLER( (irq / GIC_GICD_ICENABLER_PER_REG) ) = 
 		1U << ( irq % GIC_GICD_ICENABLER_PER_REG );
 }
@@ -102,7 +103,8 @@ void gicd_disable_int(irq_no irq) {
 /** Enable IRQ
     @param[in] irq IRQ number
  */
-void gicd_enable_int(irq_no irq) {
+void gicd_enable_int(irq_no irq)
+{
 
 	*REG_GIC_GICD_ISENABLER( (irq / GIC_GICD_ISENABLER_PER_REG) ) =
 		1U << ( irq % GIC_GICD_ISENABLER_PER_REG );
@@ -112,7 +114,8 @@ void gicd_enable_int(irq_no irq) {
 /** Clear a pending interrupt
     @param[in] irq IRQ number
  */
-void gicd_clear_pending(irq_no irq) {
+void gicd_clear_pending(irq_no irq)
+{
 
 	*REG_GIC_GICD_ICPENDR( (irq / GIC_GICD_ICPENDR_PER_REG) ) = 
 		1U << ( irq % GIC_GICD_ICPENDR_PER_REG );
@@ -122,7 +125,8 @@ void gicd_clear_pending(irq_no irq) {
 /** Probe pending interrupt
     @param[in] irq IRQ number
  */
-static int gicd_probe_pending(irq_no irq) {
+static int gicd_probe_pending(irq_no irq)
+{
 	int is_pending;
 
 	is_pending = ( *REG_GIC_GICD_ISPENDR( (irq / GIC_GICD_ISPENDR_PER_REG) ) &
@@ -139,7 +143,8 @@ static int gicd_probe_pending(irq_no irq) {
     0x4 processor 2
     0x8 processor 3
  */
-static void gicd_set_target(irq_no irq, uint32_t p){
+static void gicd_set_target(irq_no irq, uint32_t p)
+{
 	uint32_t  shift;
 	uint32_t    reg;
 
@@ -155,7 +160,8 @@ static void gicd_set_target(irq_no irq, uint32_t p){
     @param[in] irq  IRQ number
     @param[in] prio Interrupt priority in Arm specific expression
  */
-static void gicd_set_priority(irq_no irq, uint32_t prio){
+static void gicd_set_priority(irq_no irq, uint32_t prio)
+{
 	uint32_t  shift;
 	uint32_t    reg;
 
@@ -188,7 +194,8 @@ static void gicd_config(irq_no irq, unsigned int config)
     @param[in] ctrlr   IRQ controller information
     @param[in] irq     IRQ number
  */
-void gic_v3_eoi(irq_no irq) {
+void gic_v3_eoi(irq_no irq)
+{
 	gicd_clear_pending(irq);
 }
 
@@ -215,7 +222,8 @@ void gic_v3_initialize(void)
     @param[in]     exc  An exception frame
     @param[in,out] irqp An IRQ number to be processed
  */
-int gic_v3_find_pending_irq(struct _exception_frame *exc __attribute__((unused)), irq_no *irqp) {
+int gic_v3_find_pending_irq(struct _exception_frame *exc __attribute__((unused)), irq_no *irqp)
+{
 	int   rc;
 	irq_no i;
 	for( i = 0; GIC_INT_MAX > i; ++i) {

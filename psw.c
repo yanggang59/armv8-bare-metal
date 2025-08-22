@@ -13,7 +13,8 @@
 /** Disable interrupt at CPU level
     @ param [in] pswp Processor status word return area before interrupt disabled
  */
-void psw_disable_and_save_interrupt(psw_t *pswp) {
+void psw_disable_and_save_interrupt(psw_t *pswp)
+{
 	psw_t psw;
 
 	__save_psw(psw);
@@ -25,7 +26,8 @@ void psw_disable_and_save_interrupt(psw_t *pswp) {
 /** Restore interrupt status at CPU level
     @ param [in] pswp Processor status word return area
  */
-void psw_restore_interrupt(psw_t *pswp) {
+void psw_restore_interrupt(psw_t *pswp)
+{
 	psw_t psw;
 
 	psw = *pswp;
